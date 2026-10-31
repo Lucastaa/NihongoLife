@@ -136,3 +136,6 @@ NihongoLife/test_results_playmode.xml
 *.mtl.bak
 *.mtl.bak.meta
 NihongoLife/WebGLZoneBundles/
+NihongoLife/Assets/NihongoLife/Resources/EduAccountConfig.json.meta
+NihongoLife/Assets/NihongoLife/Scripts/Core/EduAccountLink.cs.meta
+NihongoLife/Assets/NihongoLife/Scripts/UI/EduAccountLinkScreen.cs.meta
