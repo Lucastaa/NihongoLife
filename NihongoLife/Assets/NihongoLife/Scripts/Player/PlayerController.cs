@@ -234,6 +234,7 @@ namespace NihongoLife.Player
             if (_isGrounded && _input != null && !NihongoLife.UI.UiModalStack.IsTyping && _input.WasPressed(GameInputId.Jump))
             {
                 _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                _isGrounded = false;
             }
             _velocity.y = Mathf.Max(_velocity.y + gravity * Time.deltaTime, maxFallSpeed);
             Vector3 finalMove = _smoothedMoveDirection * currentSpeed + new Vector3(_knock.x, 0f, _knock.z);
@@ -264,10 +265,18 @@ namespace NihongoLife.Player
                 _hasClickDestination = false;
                 _smoothedMoveDirection = Vector3.zero;
             }
-            if ((flags & CollisionFlags.Below) != 0 && _velocity.y < 0f && Time.time >= _knockUntil)
+            
+            if (_characterController.isGrounded || (flags & CollisionFlags.Below) != 0)
             {
-                _velocity.y = -2f;
+                if (_velocity.y < 0f && Time.time >= _knockUntil)
+                {
+                    _velocity.y = -2f;
+                }
                 _isGrounded = true;
+            }
+            else
+            {
+                _isGrounded = false;
             }
             HandleFootsteps(moveDirection.sqrMagnitude > 0.01f, isRunning);
         }
